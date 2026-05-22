@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Аудит рабочих задач — лендинг
 
 Интерактивная страница по Excel-файлу **Аудит рабочих задач_with_extension.xlsx** (лист Practicum).
@@ -46,3 +47,7 @@ python scripts/export_audit_v2.py
 ## Стек
 
 Next.js 16, React 19, Tailwind v4, Recharts, Lucide.
+=======
+# audit-landing
+Аудит рабочих задач 
+>>>>>>> 22f9cfef9aa380f93f1b3a4009c1aa966db2da26
