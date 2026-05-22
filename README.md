@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Аудит рабочих задач — лендинг
 
-## Getting Started
+Интерактивная страница по Excel-файлу **Аудит рабочих задач_with_extension.xlsx** (лист Practicum).
 
-First, run the development server:
+## Быстрый вход (Windows)
+
+В корне **этого** проекта есть batch-файлы:
+
+| Файл | Когда использовать |
+|------|---------------------|
+| `ОТКРЫТЬ_ЛЕНДИНГ.bat` | Полный цикл перед проверкой: убить порт 3000 → `npm run build` → браузер → `npm run start`. |
+| `ОБНОВИТЬ_ДАННЫЕ.bat` | Перегенерировать `src/data/audit.json` через `..\scripts\export_audit_v2.py`. |
+| `СОБРАТЬ_ФИНАЛ.bat` | Редкий финальный просмотр: перед `npm run start` также чистится порт 3000. |
+
+Подробнее: **`docs/WORKFLOW.md`**.
+
+Компас родительской папки («Аналитик данных», много временных файлов): **`README-ПРО-АУДИТ-ЛЕНДИНГ.md`** в каталог на уровень выше от `audit-landing`.
+
+## Запуск вручную
 
 ```bash
+cd audit-landing
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Откройте [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> **Windows + длинный путь OneDrive:** если `npm run dev` падает с ошибкой Turbopack «path length exceeds max», используйте production-режим: `npm run build` → `npm run start`, либо откройте проект через короткий путь `subst X: "…\Аналитик данных"` и `cd X:\audit-landing`. В `package.json` для dev включён флаг `--webpack`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Обновление данных
 
-## Learn More
+1. Положите или обновите `.xlsx` в корень папки **`Аналитик данных`** (на уровень выше этого репозитория).
+2. Запустите **`ОБНОВИТЬ_ДАННЫЕ.bat`** или из **`Аналитик данных`**:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+python scripts/export_audit_v2.py
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Скрипт пересоберёт `audit-landing/src/data/audit.json`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Особенности сборки UI
 
-## Deploy on Vercel
+Графики (Recharts) подключаются через клиентский `ChartsSectionGate` с **`dynamic(..., { ssr: false })`**, чтобы при `next build` не возникало предупреждений из-за измерений `ResponsiveContainer` без DOM.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Стек
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Next.js 16, React 19, Tailwind v4, Recharts, Lucide.
