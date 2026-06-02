@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import clsx from "clsx";
 import { ChevronDown, Sparkles } from "lucide-react";
