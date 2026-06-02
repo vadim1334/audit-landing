@@ -30,7 +30,7 @@ export const companies = [
     role: "AI Product Manager / Product Marketing",
     focus: "AI-продукты, маркетплейс агентов, GenAI roadmap, activation/retention",
     achievements: [
-      "Ведёт маркетплейс ИИ-агентов для SMB и enterprise-продукт Jay Copilot.",
+      "Развиваю маркетплейс ИИ-агентов для SMB и enterprise-продукт Jay Copilot.",
       "Запустил 10 AI-агентов: от сценариев и MVP-гипотез до вывода в каталог.",
       "+5 п.п. к activation через сегментацию пользователей и role-based онбординг.",
       "Сформировал стратегию и roadmap на 2026 для GenAI-продукта.",

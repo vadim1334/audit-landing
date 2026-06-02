@@ -6,7 +6,6 @@ import {
   BarChart,
   CartesianGrid,
   Cell,
-  Legend,
   PolarAngleAxis,
   PolarGrid,
   Radar,
@@ -21,6 +20,7 @@ const tooltipStyle = {
   background: "#18181b",
   border: "1px solid rgba(255,255,255,0.1)",
   borderRadius: 8,
+  boxShadow: "0 16px 40px rgba(0,0,0,0.24)",
 };
 
 function ChartCard({
@@ -34,16 +34,16 @@ function ChartCard({
 }) {
   return (
     <article className="card-surface flex min-w-0 flex-col p-5 sm:p-6">
-      <h3 className="text-sm font-medium">{title}</h3>
+      <h3 className="text-base font-medium">{title}</h3>
       <p className="mt-1 text-xs text-[var(--text-muted)]">{subtitle}</p>
-      <div className="mt-4 h-[300px] min-w-0">{children}</div>
+      <div className="mt-4 h-[320px] min-w-0 sm:h-[340px]">{children}</div>
     </article>
   );
 }
 
 export function ResumeCharts() {
   return (
-    <section id="charts" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <section id="charts" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-20">
       <div className="mb-8 max-w-3xl">
         <p className="text-xs uppercase tracking-wider text-[var(--text-dim)]">
           Аналитика профиля
@@ -91,16 +91,17 @@ export function ResumeCharts() {
             <BarChart
               layout="vertical"
               data={workStreams}
-              margin={{ top: 4, right: 18, left: 42, bottom: 4 }}
+              margin={{ top: 4, right: 18, left: 8, bottom: 4 }}
             >
               <CartesianGrid strokeDasharray="3 3" horizontal={false} />
               <XAxis type="number" domain={[0, 100]} tickLine={false} axisLine={false} />
               <YAxis
                 type="category"
                 dataKey="title"
-                width={92}
+                width={124}
                 tickLine={false}
                 axisLine={false}
+                tick={{ fill: "#a1a1aa", fontSize: 11 }}
               />
               <Tooltip
                 contentStyle={tooltipStyle}
@@ -114,26 +115,27 @@ export function ResumeCharts() {
           </ResponsiveContainer>
         </ChartCard>
 
-        <ChartCard
-          title="Профиль компетенций"
-          subtitle="Product, AI/LLM, аналитика, growth, delivery и web/design"
-        >
-          <ResponsiveContainer width="100%" height="100%">
-            <RadarChart data={stackRows} outerRadius={100}>
-              <PolarGrid stroke="rgba(255,255,255,0.12)" />
-              <PolarAngleAxis dataKey="name" tick={{ fill: "#a1a1aa", fontSize: 11 }} />
-              <Radar
-                name="стек"
-                dataKey="score"
-                stroke="#a3e635"
-                fill="#a3e635"
-                fillOpacity={0.22}
-              />
-              <Legend />
-              <Tooltip contentStyle={tooltipStyle} />
-            </RadarChart>
-          </ResponsiveContainer>
-        </ChartCard>
+        <div className="lg:col-span-2">
+          <ChartCard
+            title="Профиль компетенций"
+            subtitle="Product, AI/LLM, аналитика, growth, delivery и web/design"
+          >
+            <ResponsiveContainer width="100%" height="100%">
+              <RadarChart data={stackRows} outerRadius={100}>
+                <PolarGrid stroke="rgba(255,255,255,0.12)" />
+                <PolarAngleAxis dataKey="name" tick={{ fill: "#a1a1aa", fontSize: 11 }} />
+                <Radar
+                  name="стек"
+                  dataKey="score"
+                  stroke="#a3e635"
+                  fill="#a3e635"
+                  fillOpacity={0.22}
+                />
+                <Tooltip contentStyle={tooltipStyle} />
+              </RadarChart>
+            </ResponsiveContainer>
+          </ChartCard>
+        </div>
       </div>
     </section>
   );

@@ -18,12 +18,9 @@ const ResumeChartsLazy = dynamic(
           <div className="mt-2 h-12 max-w-3xl rounded-lg bg-[var(--border-strong)]/20" />
         </div>
         <div className="grid gap-4 lg:grid-cols-2">
-          {[0, 1, 2].map((item) => (
-            <div
-              key={item}
-              className="card-surface h-[408px] animate-pulse bg-[var(--bg-card)]"
-            />
-          ))}
+          <div className="card-surface h-[408px] animate-pulse bg-[var(--bg-card)]" />
+          <div className="card-surface h-[408px] animate-pulse bg-[var(--bg-card)]" />
+          <div className="card-surface h-[408px] animate-pulse bg-[var(--bg-card)] lg:col-span-2" />
         </div>
       </section>
     ),
